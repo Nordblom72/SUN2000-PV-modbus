@@ -1,3 +1,5 @@
+#!/usr/local/bin node
+
 const ModbusRTU   = require ("modbus-serial");
 const schedule    = require ('node-schedule');
 const { convertFromUtcToLocalDate, monthsAsTextList, numDaysInMonth } = require ('./src/helper');
