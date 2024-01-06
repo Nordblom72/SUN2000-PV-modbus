@@ -45,6 +45,8 @@ let dbHrCache = {
   isComplete: false
 }
 
+console.log("Server started: ", convertFromUtcToLocalDate(new Date()));
+
 // schedule poll and update DB tasks
 const poll_job     = schedule.scheduleJob('* * * * *', function() {  // Every minute
   console.log('Scheduled task: Poll registers!'); 
@@ -132,13 +134,12 @@ const handle_daily_data = function (value) {
   total_dayly_pwr = value;
   console.log("DAILY: ", total_dayly_pwr);
   console.log("   minute: ", minute);
-  
+  console.log
   if (current_hourly_acc_pwr.startVal === 0) {
     current_hourly_acc_pwr.startVal  = value;
     if (minute == 0) {
       current_hourly_acc_pwr.startValIsFromMin0 = true
     }
-    console.log(" DANNE-1: current_hourly_acc_pwr.startValIsFromMin0 = ", current_hourly_acc_pwr.startValIsFromMin0);
   } else {
     current_hourly_acc_pwr.accHrVal = value - current_hourly_acc_pwr.startVal;
   }
@@ -156,7 +157,6 @@ const handle_daily_data = function (value) {
     current_hourly_acc_pwr.accHrVal = 0;
     current_hourly_acc_pwr.startVal = hour == 0 ? 0:value //Day wrap and no sun at midnight. Clear startVal
     current_hourly_acc_pwr.startValIsFromMin0 = true;
-    console.log(" DANNE-2: current_hourly_acc_pwr.startValIsFromMin0 = ", current_hourly_acc_pwr.startValIsFromMin0)
   }
 }
 
@@ -189,9 +189,7 @@ const updateDb = async function () {
   let year, month, day, hour, rest;
   let produced = 0;
   let isComplete = false;
-  [year, month, day, ...rest] = date.toISOString().split('T')[0].split('-');
-  [hour, ...rest]     = date.toISOString().split('T')[1].split(':');
-  console.log("   *** Prepping data and sending to DB *** ", date.toISOString());
+    console.log("   *** Prepping data and sending to DB *** ", date.toISOString());
 
   if (dbHrCache.sendMeToDb) {
     console.log("Sending to DB on full HR: ", dbHrCache);
@@ -206,6 +204,9 @@ const updateDb = async function () {
     console.log("Sending casual update");
     produced = current_hourly_acc_pwr.accHrVal;
   }
+
+  [year, month, day, ...rest] = date.toISOString().split('T')[0].split('-');
+  [hour, ...rest]             = date.toISOString().split('T')[1].split(':');
 
   // Handle month & hr
   let monthName = monthsAsTextList[month-1]; // monthNr  0-11
