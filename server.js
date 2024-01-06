@@ -21,18 +21,18 @@ const MBS_STATE_FAIL_CONNECT  = "State fail (port)";
 
 // Modbus TCP configuration values
 const mbsId       = 1;
-const mbsPort     = 502;
-const mbsHost     = "192.168.1.212";
+const mbsPort     = `${process.env.MBS_PORT}`;;
+const mbsHost     = `${process.env.MBS_HOST}`;
 const mbsScan     = 2000;
 const mbsTimeout  = 5000;
-let mbsState    = MBS_STATE_INIT;
+let mbsState      = MBS_STATE_INIT;
 
 // Meas data containers
 let total_acc_pwr = 0;
 let total_dayly_pwr = 0;
 let current_hourly_acc_pwr  = {
-  startVal: 0.0,
-  accHrVal: 0.0,
+  startVal:  0.0,
+  accHrVal:  0.0,
   currentHr: 0,
   date: null,
   startValIsFromMin0: false
@@ -129,7 +129,7 @@ const get_accumulated_yield_energy = async function () {
 const handle_daily_data = function (value) {
   let date = convertFromUtcToLocalDate(new Date());
   let hour, minute, rest;
-  [hour, minute, ...rest]     = date.toISOString().split('T')[1].split(':');
+  [hour, minute, ...rest] = date.toISOString().split('T')[1].split(':');
 
   total_dayly_pwr = value;
   console.log("DAILY: ", total_dayly_pwr);
