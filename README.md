@@ -7,13 +7,13 @@ This MODBUS-TCP service polls two registers on the inverter for power values (to
 Furthermore, the MODBUS-TCP must be enabled, which by default is disabled.
 [MODBUS TCP Guide](https://www.photovoltaikforum.com/core/attachment/260120-sdonglea-05-modbus-tcp-guide-pdf/)
 
-The service uses two node-scheduler functions for polling and storing the data. Currently, the inverter registers are polled every minute and the ackumulated data is stored in a MongoDB database every 5:th minute. The scheduler functions have a simple crone-style API and can easely be reconfigured for other timeouts.
+The service uses two node-scheduler functions for polling and storing the data. Currently, the inverter registers are polled once every minute and the ackumulated data is stored in a MongoDB database every 5:th minute. The database object holds power values with granuality of on hour. The scheduler functions have a simple crone-style API and can easely be reconfigured for other intervals.
 
 ## References
 * [MODBUS TCP Guide](https://www.photovoltaikforum.com/core/attachment/260120-sdonglea-05-modbus-tcp-guide-pdf/)
 * [SUN2000 series MODBUS Interface definition V3 (2019-10-31)](https://www.photovoltaikforum.com/core/attachment/180219-solar-inverter-modbus-interface-definitions-v3-0-pdf/)
 * [Python library for connecting to Huawei SUN2000 Inverters over Modbus](https://github.com/wlcrs/huawei-solar-lib)
-[An interesting discussion thread](https://forum.logicmachine.net/showthread.php?tid=3861)
+* [An interesting discussion thread](https://forum.logicmachine.net/showthread.php?tid=3861)
 
 ## ToDo
 * Increase DbMongo timeout
