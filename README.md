@@ -7,7 +7,7 @@ This MODBUS-TCP service polls two registers on the inverter for power values (to
 Furthermore, the MODBUS-TCP must be enabled, which by default is disabled.
 [MODBUS TCP Guide](https://www.photovoltaikforum.com/core/attachment/260120-sdonglea-05-modbus-tcp-guide-pdf/)
 
-The service uses two node-scheduler functions for polling and storing the data. Currently, the inverter registers are polled once every minute and the ackumulated data is stored in a MongoDB database every 5:th minute. The database object holds power values with granuality of on hour. The scheduler functions have a simple crone-style API and can easely be reconfigured for other intervals.
+The service uses two node-scheduler functions for polling and storing the data. Currently, the inverter registers are polled once every minute and the ackumulated data is stored in a MongoDB database every 5:th minute. The database object holds power values with granuality of one hour. The scheduler functions have a simple crone-style API and can easely be reconfigured for other intervals.
 
 ## References
 * [MODBUS TCP Guide](https://www.photovoltaikforum.com/core/attachment/260120-sdonglea-05-modbus-tcp-guide-pdf/)
